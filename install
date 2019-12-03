@@ -1,1 +1,23 @@
 #!/bin/bash
+bits=$(hostnamectl | grep "Architecture" | sed "s/      Architecture: //");
+
+
+if [ "$(whoami)" != "root" ]; then
+    echo "You need to login as root to use this script! Sorry!";
+    exit 1
+fi
+if [ "$bits" != "x86-64" ]; then
+    echo "This script was created for x86-64 and yours is $bits";
+    exit 1
+fi
+if [ "$(grep DISTRIB_CODENAME /etc/*-release | awk -F '=' '{print $2}')" != "focal" ]; then
+    echo "This was created for Ubuntu 20.04 your car is out of date please upgrade!";
+    exit 1
+fi
+       apt-get update -y
+       apt-get upgrade -y
+       apt-get dist-upgrade -y
+       apt-get autoremove -y
+       apt-get autoremove -y
+       apt-get autoclean -y
+       set LC_ALL=en_US.UTF-8; export LC_ALL=en_US.UTF-8 # Docker FIX.
