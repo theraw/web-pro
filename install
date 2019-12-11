@@ -39,7 +39,7 @@ fi
        perl -pi -e 's/;error_log = syslog/error_log = php_error.log/g' /etc/php/7.3/fpm/php.ini
        perl -pi -e 's/;date.timezone =/date.timezone = UTC/g' /etc/php/7.3/fpm/php.ini
        ln -sf /etc/nginx /nginx
-       service php7.0-fpm restart
+       service php7.3-fpm restart
        
        clear
        echo 'Nginx Installation Done';
