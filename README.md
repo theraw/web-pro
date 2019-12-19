@@ -35,3 +35,8 @@ UP
 1.7 Mysql Root password and Remote user password located on /MYSQL_PASSWORD
 ```
 
+Warning!
+
+Do not change container IPs and subnet, this is a static method it means it was meant to run on those IPs if you want to change those private IPs make sure you check out all configs from mysql config ending to nginx and php configs.
+
+Folder `/hostdata/` is shared `host`<=>`'web' container` it's meant to host your website files so you can easly access them directly from your host without needing to access your container!
