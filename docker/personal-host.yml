@@ -16,6 +16,8 @@ services:
     networks:
       web_pro_net:
         ipv4_address: 172.69.0.70
+    volumes:
+     - /hostdata:/hostdata
     command: ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
 
   mysql:
