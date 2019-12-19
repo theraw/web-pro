@@ -16,7 +16,22 @@ services:
     networks:
       web_pro_net:
         ipv4_address: 172.69.0.70
-
+        
+  php73:
+    container_name: php73
+    ports:
+     - "127.0.0.1:8090:80"
+     - "127.0.0.1:3306:3306"
+    image: "default"
+    privileged: true
+    restart: unless-stopped
+    shm_size: 512MB
+    cap_add:
+     - ALL
+    networks:
+      web_pro_net:
+        ipv4_address: 172.69.0.72
+        
   mysql:
     container_name: mysql
     ports:
