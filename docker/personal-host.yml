@@ -16,30 +16,11 @@ services:
     networks:
       web_pro_net:
         ipv4_address: 172.69.0.70
-    command: ["nginx", "-g", "daemon off;"]
-
-  php73:
-    container_name: php73
-    ports:
-     - "127.0.0.1:9000:9000"
-     - "127.0.0.1:9002:9002"
-     - "127.0.0.1:9004:9004"
-     - "127.0.0.1:9006:9006"
-    image: "theraw/web-pro:php73"
-    privileged: true
-    restart: unless-stopped
-    shm_size: 512MB
-    cap_add:
-     - ALL
-    networks:
-      web_pro_net:
-        ipv4_address: 172.69.0.90
-    command: /sbin/init
+    command: ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
 
   mysql:
     container_name: mysql
     ports:
-     - "127.0.0.1:8090:80"
      - "127.0.0.1:3306:3306"
     image: "theraw/web-pro:mysql"
     privileged: true
