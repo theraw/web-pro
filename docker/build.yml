@@ -1,0 +1,43 @@
+version: '3'
+services:
+  web:
+    container_name: web
+    ports:
+     - "127.0.0.1:8080:80"
+     - "127.0.0.1:8443:443"
+     - "127.0.0.1:8021:21"
+     - "127.0.0.1:8022:22"
+    image: "default"
+    privileged: true
+    restart: unless-stopped
+    shm_size: 512MB
+    cap_add:
+     - ALL
+    networks:
+      web_pro_net:
+        ipv4_address: 172.69.0.70
+
+  mysql:
+    container_name: mysql
+    ports:
+     - "127.0.0.1:8090:80"
+     - "127.0.0.1:3306:3306"
+    image: "default"
+    privileged: true
+    restart: unless-stopped
+    shm_size: 512MB
+    cap_add:
+     - ALL
+    networks:
+      web_pro_net:
+        ipv4_address: 172.69.0.72
+
+networks:
+  web_pro_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.69.0.0/16
