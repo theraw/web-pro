@@ -22,7 +22,7 @@ UP
 ```$ INFO
 1. Nginx running on container 'web'
 2. Php 7.3 Running on container 'web'
-3. Nginx running on host 172.69.0.70:80 (or host 127.0.0.1:8080)
+3. Nginx running on container ip 172.69.0.70:80 (or host 127.0.0.1:8080)
 4. Php7.3-fpm running on 172.69.0.70:9000 (can be connected from host (remote))
 5. container runs on alpine linux 3.10, and it's configured to automatically start nginx+php on start
 6. Make sure you configure php (on /etc/php7/php.ini,php-fpm.d/www.conf) and nginx /etc/nginx or /nginx.
