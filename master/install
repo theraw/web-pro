@@ -1,14 +1,48 @@
 #!/bin/bash
-
-# TO-DO
-
+# ========================================================================
 #1 . Install nginx
+# ========================================================================
+apt-get update
+apt-get -y upgrade
+apt-get -y dist-upgrade
+apt-get -y autoremove
+apt-get install -y apt-transport-https lsb-release ca-certificates
+mkdir -p /etc/ssl/nginx
+curl -s https://raw.githubusercontent.com/theraw/web-pro/master/plus/nginx-repo.crt > /etc/ssl/nginx/nginx-repo.crt
+curl -s https://raw.githubusercontent.com/theraw/web-pro/master/plus/nginx-repo.key > /etc/ssl/nginx/nginx-repo.key
+wget http://nginx.org/keys/nginx_signing.key && sudo apt-key add nginx_signing.key
+printf "deb https://plus-pkgs.nginx.com/ubuntu `lsb_release -cs` nginx-plus\n" | sudo tee /etc/apt/sources.list.d/nginx-plus.list
+wget -P /etc/apt/apt.conf.d https://cs.nginx.com/static/files/90nginx
+apt-get update
+apt install -y nginx-plus
+apt install -y nginx-plus-module-geoip2 nginx-plus-module-headers-more
 
-
+# ========================================================================
 #2 . Install Docker Composer
+# ========================================================================
 curl -L https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
+# ========================================================================
 #3 . Install Php
+# ========================================================================
+apt install -y php7.2 php7.2-cgi php7.2-bcmath php7.2-bz2 php7.2-cli php7.2-common php7.2-curl php7.2-dba php7.2-dev php7.2-enchant php7.2-fpm php7.2-gd php7.2-gmp php7.2-imap php7.2-interbase php7.2-intl php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql php7.2-odbc php7.2-opcache php7.2-pgsql php7.2-phpdbg php7.2-pspell php7.2-readline php7.2-recode php7.2-soap php7.2-sqlite3 php7.2-sybase php7.2-tidy php7.2-xml php7.2-xmlrpc php7.2-xsl php7.2-zip
 
+# ========================================================================
 #4 . Set Up Panel
+# ========================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
