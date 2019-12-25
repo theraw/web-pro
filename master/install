@@ -24,7 +24,13 @@ curl -L https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-co
 chmod +x /usr/local/bin/docker-compose
 
 # ========================================================================
-#3 . Install Php
+#3 . Setup MariaDB
+# ========================================================================
+curl -s https://raw.githubusercontent.com/theraw/web-pro/master/master/mysql.yml > /tmp/mysql.yml
+docker-compose -f /tmp/mysql.yml up -d
+
+# ========================================================================
+#4 . Install Php
 # ========================================================================
 apt install -y php7.2 php7.2-cgi php7.2-bcmath php7.2-bz2 php7.2-cli php7.2-common php7.2-curl php7.2-dba php7.2-dev php7.2-enchant php7.2-fpm php7.2-gd php7.2-gmp php7.2-imap php7.2-interbase php7.2-intl php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql php7.2-odbc php7.2-opcache php7.2-pgsql php7.2-phpdbg php7.2-pspell php7.2-readline php7.2-recode php7.2-soap php7.2-sqlite3 php7.2-sybase php7.2-tidy php7.2-xml php7.2-xmlrpc php7.2-xsl php7.2-zip
 curl -s https://raw.githubusercontent.com/theraw/web-pro/master/master/www.conf > /etc/php/7.2/fpm/pool.d/www.conf
@@ -35,7 +41,7 @@ perl -pi -e 's/;error_log = syslog/error_log = PHP_ERRORS.log/g' /etc/php/7.2/fp
 perl -pi -e 's/;date.timezone =/date.timezone = UTC/g' /etc/php/7.2/fpm/php.ini
 
 # ========================================================================
-#4 . Start Services
+#5 . Start Services
 # ========================================================================
 service nginx stop
 service nginx start
@@ -44,7 +50,7 @@ service php7.2-fpm stop
 service php7.2-fpm start
 service php7.2-fpm restart
 # ========================================================================
-#5 . Set Up Panel
+#6 . Set Up Panel
 # ========================================================================
 
 
