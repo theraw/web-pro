@@ -71,10 +71,20 @@ add-apt-repository ppa:certbot/certbot
 apt-get update
 apt-get -y upgrade
 apt-get -y install certbot
+apt-get -y python3-certbot-dns-cloudflare
 echo 'dns_cloudflare_email = change@email.com' > /root/.cf.ini
 echo 'dns_cloudflare_api_key = 77777777777777777777777' >> /root/.cf.ini
 chmod 400 /root/.cf.ini
-
+echo 'certbot certonly \' > /bin/genssl
+echo '  --dns-cloudflare \' >> /bin/genssl
+echo '  --dns-cloudflare-credentials $2 \' >> /bin/genssl
+echo '  --email $3 \' >> /bin/genssl
+echo '  --agree-tos \' >> /bin/genssl
+echo '  --non-interactive \' >> /bin/genssl
+echo '  -d "$1,*.$1"' >> /bin/genssl
+chmod +x /bin/genssl
+chown -R nginx:nginx /bin/genssl
+sudo certbot renew --dry-run
 # ========================================================================
 #7 . Set Up Panel
 # ========================================================================
