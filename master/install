@@ -61,9 +61,25 @@ service nginx restart
 service php7.2-fpm stop
 service php7.2-fpm start
 service php7.2-fpm restart
+
 # ========================================================================
-#6 . Set Up Panel
+#6 . Install certbot
 # ========================================================================
+apt-get install software-properties-common
+add-apt-repository universe
+add-apt-repository ppa:certbot/certbot
+apt-get update
+apt-get -y upgrade
+apt-get -y install certbot
+echo 'dns_cloudflare_email = change@email.com' > /root/.cf.ini
+echo 'dns_cloudflare_api_key = 77777777777777777777777' >> /root/.cf.ini
+chmod 400 /root/.cf.ini
+
+# ========================================================================
+#7 . Set Up Panel
+# ========================================================================
+
+
 
 
 
