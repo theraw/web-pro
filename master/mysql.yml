@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mysql:
+    container_name: mysql
+    ports:
+     - "127.0.0.1:3306:3306"
+    image: "theraw/web-pro:mysql"
+    privileged: true
+    restart: unless-stopped
+    shm_size: 512MB
+    cap_add:
+     - ALL
+    networks:
+      web_pro_net:
+        ipv4_address: 172.69.0.72
+    command: /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0
+
+networks:
+  web_pro_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.69.0.0/16
