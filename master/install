@@ -40,6 +40,7 @@ chmod +x /usr/local/bin/docker-compose
 # ========================================================================
 curl -s https://raw.githubusercontent.com/theraw/web-pro/master/master/mysql.yml > /tmp/mysql.yml
 docker-compose -f /tmp/mysql.yml up -d
+apt-get install -y mysql-client
 
 # ========================================================================
 #4 . Install Php
