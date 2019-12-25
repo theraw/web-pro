@@ -15,8 +15,20 @@ printf "deb https://plus-pkgs.nginx.com/ubuntu `lsb_release -cs` nginx-plus\n" |
 wget -P /etc/apt/apt.conf.d https://cs.nginx.com/static/files/90nginx
 apt-get update
 apt install -y nginx-plus
-apt install -y nginx-plus-module-geoip2 nginx-plus-module-headers-more
+apt install -y nginx-plus-module-geoip2 nginx-plus-module-headers-more nginx-plus-module-brotli
 ln -sf /etc/nginx /nginx
+mkdir -p /hostdata/default/public_html
+mkdir -p /nginx/live
+mkdir -p /nginx/config
+rm -Rf /nginx/conf.d/*
+curl -s https://raw.githubusercontent.com/theraw/web-pro/master/master/nginx.conf > /nginx/nginx.conf
+curl -s https://raw.githubusercontent.com/theraw/web-pro/master/master/index.html > /hostdata/default/public_html/index.html
+curl -s https://raw.githubusercontent.com/theraw/web-pro/master/master/default.conf > /nginx/live/default.conf
+curl -s https://raw.githubusercontent.com/theraw/web-pro/master/master/dh2048.pem > /nginx/config/dh2048.pem
+curl -s https://raw.githubusercontent.com/theraw/web-pro/master/master/ssl.conf > /nginx/config/ssl.conf
+curl -s https://raw.githubusercontent.com/theraw/web-pro/master/master/php72.conf > /nginx/config/php72.conf
+curl -s https://raw.githubusercontent.com/theraw/web-pro/master/master/security_headers.conf > /nginx/config/security_headers.conf
+ex -sc "%s/127.0.0.1/`curl -s api.ipify.org`/g|x" /nginx/live/default.conf
 # ========================================================================
 #2 . Install Docker Composer
 # ========================================================================
