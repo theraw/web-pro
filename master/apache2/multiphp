@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+apt-get install apache2 php5.6-fpm php7.3-fpm libapache2-mod-fcgid -y
+a2enmod alias proxy proxy_fcgi
+
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/html
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+    <FilesMatch \.php$>
+        # Apache 2.4.10+ can proxy to unix socket
+        SetHandler "proxy:fcgi://127.0.0.1:9000"
+    </FilesMatch>
+</VirtualHost>
+
