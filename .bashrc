@@ -6,6 +6,7 @@ fi
 
 # Aliases
 cd ~
+alias ls='ls --color'
 alias h='cd ~;clear;'
 
 . /etc/os-release
